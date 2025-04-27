@@ -4,37 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Mappák Feldolgozása</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .folder-title {
+            color: #007bff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .pdf-link {
+            font-size: 1.2rem;
+            color: #495057;
+            text-decoration: none;
+        }
+        .pdf-link:hover {
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
 </head>
 <body>
-    <h1>GitHub Mappák:</h1>
-    
-    <!-- Mappa 1 -->
-    <h2>Mappa 1:</h2>
-    <ul>
-        <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H1/Programozói-nyelvek-fejlesztő-eszközök.pdf" target="_blank">PDF Fájl 1</a></li>
-    </ul>
 
-    <!-- Mappa 2 -->
-    <h3>Mappa 2:</h3>
-    <ul>
-        <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H2/Vízió-dokumentum.pdf" target="_blank">PDF Fájl 1</a></li>
-    </ul>
+    <div class="container">
+        <h1 class="text-center mb-5">GitHub Mappák</h1>
 
-    <!-- Mappa 3 -->
-    <h4>Mappa 3:</h4>
-    <ul>
-        <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H3/Software-követelmény-specifikáció.pdf" target="_blank">PDF Fájl 1</a></li>
-        <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H3/Felhasználói-Kézikönyv.pdf" target="_blank">PDF Fájl 2</a></li>
-    </ul>
+        <!-- Mappa 1 -->
+        <div class="folder">
+            <h2 class="folder-title">H1 Mappa</h2>
+            <ul class="list-unstyled">
+                <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H1/Programozói-nyelvek-fejlesztő-eszközök.pdf" class="pdf-link" target="_blank">Programozói nyelvek fejlesztő eszközök</a></li>
+            </ul>
+        </div>
 
-    <!-- Mappa 4 -->
-    <h4>Mappa 4:</h4>
-    <ul>
-        <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H4/Rendszertervezés%20és%20Analízis%20modell.pdf" target="_blank">PDF Fájl 1</a></li>
-    </ul>
+        <!-- Mappa 2 -->
+        <div class="folder">
+            <h3 class="folder-title">H2 Mappa</h3>
+            <ul class="list-unstyled">
+                <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H2/Vízió-dokumentum.pdf" class="pdf-link" target="_blank">Vízió dokumentum</a></li>
+            </ul>
+        </div>
 
-    <h2>Megjegyzés:</h2>
-    <p>Minden mappában PDF fájlok találhatók, amelyeket a fenti linkekre kattintva tekinthet meg.</p>
+        <!-- Mappa 3 -->
+        <div class="folder">
+            <h4 class="folder-title">H3 Mappa</h4>
+            <ul class="list-unstyled">
+                <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H3/Software-követelmény-specifikáció.pdf" class="pdf-link" target="_blank">Software követelmény specifikáció</a></li>
+                <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H3/Felhasználói-Kézikönyv.pdf" class="pdf-link" target="_blank">Felhasználói kézikönyv</a></li>
+            </ul>
+        </div>
+
+        <!-- Mappa 4 -->
+        <div class="folder">
+            <h4 class="folder-title">H4 Mappa</h4>
+            <ul class="list-unstyled">
+                <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H4/Rendszertervezés%20és%20Analízis%20modell.pdf" class="pdf-link" target="_blank">Rendszertervezés és Analízis modell</a></li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Arosdami - Minden jog fenntartva.</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
