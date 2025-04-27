@@ -22,6 +22,11 @@
             font-size: 1.5rem;
             margin-bottom: 20px;
         }
+        .folder-description {
+            font-size: 1.1rem;
+            color: #495057;
+            margin-bottom: 20px;
+        }
         .pdf-link {
             font-size: 1.2rem;
             color: #495057;
@@ -50,6 +55,7 @@
         .sidebar h2 {
             text-align: center;
             color: #f8f9fa;
+            font-size: 1.5rem;
         }
         .sidebar ul {
             list-style: none;
@@ -61,12 +67,23 @@
         .sidebar ul li a {
             color: white;
             text-decoration: none;
+            font-size: 1.1rem;
         }
         .sidebar ul li a:hover {
             color: #007bff;
         }
         .content {
             margin-left: 270px;
+        }
+        .breadcrumb {
+            background-color: transparent;
+            padding: 10px 0;
+        }
+        .breadcrumb-item a {
+            color: #007bff;
+        }
+        .breadcrumb-item.active {
+            color: #6c757d;
         }
     </style>
 </head>
@@ -86,21 +103,29 @@
     <!-- Main Content -->
     <div class="content">
         <div class="container">
-            <h1 class="text-center mb-5">Rendszer Fejlesztés Tech.</h1>
+            <!-- Breadcrumb Navigation -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Rendszer Fejlesztés Tech.</li>
+                </ol>
+            </nav>
+
+            <h1 class="text-center mb-5">GitHub Mappák és Dokumentáció</h1>
 
             <!-- Mappa 1 -->
             <div id="H1" class="folder">
-                <h2 class="folder-title">H1 Mappa</h2>
-                <p>Ez a mappa programozói nyelvek fejlesztő eszközeit tartalmazza, és az alábbi dokumentumot található benne:</p>
+                <h2 class="folder-title">H1 Mappa: Programozói Nyelvek Fejlesztése</h2>
+                <p class="folder-description">Ez a mappa a programozói nyelvek fejlesztő eszközeit tartalmazza, amelyek segítenek a nyelvek implementálásában és fejlesztésében. Az alábbi dokumentumok találhatóak benne:</p>
                 <ul class="list-unstyled">
-                    <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H1/Programozói-nyelvek-fejlesztő-eszközök.pdf" class="pdf-link" target="_blank">Programozói nyelvek fejlesztő eszközök</a></li>
+                    <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H1/Programozói-nyelvek-fejlesztő-eszközök.pdf" class="pdf-link" target="_blank">Programozói nyelvek fejlesztő eszközei</a></li>
                 </ul>
             </div>
 
             <!-- Mappa 2 -->
             <div id="H2" class="folder">
-                <h3 class="folder-title">H2 Mappa</h3>
-                <p>Ez a mappa a vízió dokumentumot tartalmazza, amely alapvető fontosságú a projekt sikeréhez:</p>
+                <h3 class="folder-title">H2 Mappa: Projekt Vízió</h3>
+                <p class="folder-description">Ez a mappa a vízió dokumentumot tartalmazza, amely alapvető fontosságú a projekt sikeréhez. Részletes információkat tartalmaz a projekt jövőbeli céljairól és terveiről:</p>
                 <ul class="list-unstyled">
                     <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H2/Vízió-dokumentum.pdf" class="pdf-link" target="_blank">Vízió dokumentum</a></li>
                 </ul>
@@ -108,8 +133,8 @@
 
             <!-- Mappa 3 -->
             <div id="H3" class="folder">
-                <h4 class="folder-title">H3 Mappa</h4>
-                <p>A H3 mappa különböző fontos specifikációkat és kézikönyveket tartalmaz:</p>
+                <h4 class="folder-title">H3 Mappa: Specifikációk és Kézikönyvek</h4>
+                <p class="folder-description">A H3 mappa különböző fontos specifikációkat és kézikönyveket tartalmaz, amelyek elengedhetetlenek a fejlesztési folyamat során:</p>
                 <ul class="list-unstyled">
                     <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H3/Software-követelmény-specifikáció.pdf" class="pdf-link" target="_blank">Software követelmény specifikáció</a></li>
                     <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H3/Felhasználói-Kézikönyv.pdf" class="pdf-link" target="_blank">Felhasználói kézikönyv</a></li>
@@ -118,13 +143,14 @@
 
             <!-- Mappa 4 -->
             <div id="H4" class="folder">
-                <h4 class="folder-title">H4 Mappa</h4>
-                <p>A H4 mappa rendszertervezési és analízis dokumentumokat tartalmaz, amelyek a projekt alapvető részét képezik:</p>
+                <h4 class="folder-title">H4 Mappa: Rendszertervezés és Analízis</h4>
+                <p class="folder-description">A H4 mappa a projekt rendszertervezési és analízis dokumentumait tartalmazza, amelyek alapvetőek a fejlesztés és a minőség biztosítás érdekében:</p>
                 <ul class="list-unstyled">
                     <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H4/Rendszertervezés%20és%20Analízis%20modell.pdf" class="pdf-link" target="_blank">Rendszertervezés és Analízis modell</a></li>
                 </ul>
             </div>
 
+            <!-- Footer -->
             <div class="footer">
                 <p>&copy; 2025 Arosdami - Minden jog fenntartva.</p>
             </div>
