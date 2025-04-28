@@ -3,164 +3,988 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rendszer Fejlesztés Tech.</title>
-
+    <title>Rendszer Fejlesztés Tech. | Professzionális Fejlesztői Platform</title>
+    
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
     <!-- Custom CSS -->
     <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+        }
+        
         body {
-            background-color: #f8f9fa;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            overflow-x: hidden;
         }
-        .container {
-            margin-top: 50px;
+        
+        /* Glassmorphism effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            transition: all 0.3s ease;
         }
-        .folder-title {
-            color: #007bff;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.2);
         }
-        .folder-description {
-            font-size: 1.1rem;
-            color: #495057;
-            margin-bottom: 20px;
-        }
-        .pdf-link {
-            font-size: 1.2rem;
-            color: #495057;
-            text-decoration: none;
-        }
-        .pdf-link:hover {
-            color: #007bff;
-            text-decoration: underline;
-        }
-        .footer {
-            margin-top: 50px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
+        
+        /* Sidebar styling */
         .sidebar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 250px;
-            height: 100%;
-            background-color: #343a40;
-            padding-top: 20px;
+            height: 100vh;
+            width: 280px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--dark-color));
             color: white;
+            padding: 20px 0;
+            z-index: 1000;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
-        .sidebar h2 {
-            text-align: center;
-            color: #f8f9fa;
+        
+        .sidebar-collapsed {
+            width: 80px;
+        }
+        
+        .sidebar-collapsed .nav-link span,
+        .sidebar-collapsed .logo-text {
+            display: none;
+        }
+        
+        .sidebar-collapsed .nav-link {
+            justify-content: center;
+        }
+        
+        .sidebar-collapsed .logo-icon {
+            margin-right: 0;
+        }
+        
+        .logo-container {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            font-size: 1.8rem;
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .logo-text {
             font-size: 1.5rem;
+            font-weight: 700;
         }
-        .sidebar ul {
-            list-style: none;
-            padding-left: 0;
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 20px;
+            margin: 5px 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
         }
-        .sidebar ul li {
-            padding: 10px;
-        }
-        .sidebar ul li a {
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
+            transform: translateX(5px);
         }
-        .sidebar ul li a:hover {
-            color: #007bff;
+        
+        .nav-link i {
+            margin-right: 10px;
+            font-size: 1.2rem;
         }
-        .content {
-            margin-left: 270px;
+        
+        /* Main content */
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+            transition: all 0.3s ease;
         }
-        .breadcrumb {
-            background-color: transparent;
-            padding: 10px 0;
+        
+        .main-content-expanded {
+            margin-left: 80px;
         }
-        .breadcrumb-item a {
-            color: #007bff;
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
         }
-        .breadcrumb-item.active {
-            color: #6c757d;
+        
+        .toggle-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-sidebar:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+        
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), #2980b9);
+            color: white;
+            padding: 15px 20px;
+            border-bottom: none;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        /* Document list */
+        .document-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background-color: rgba(240, 240, 240, 0.5);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .document-item:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .document-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+        
+        .document-name {
+            flex-grow: 1;
+            font-weight: 500;
+        }
+        
+        .document-download {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .document-download:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Animations */
+        .animate-delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .animate-delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .animate-delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .animate-delay-4 {
+            animation-delay: 0.8s;
+        }
+        
+        /* Progress bars */
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            background-color: var(--primary-color);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 80px;
+            }
+            
+            .sidebar .nav-link span,
+            .sidebar .logo-text {
+                display: none;
+            }
+            
+            .sidebar .nav-link {
+                justify-content: center;
+            }
+            
+            .sidebar .logo-icon {
+                margin-right: 0;
+            }
+            
+            .main-content {
+                margin-left: 80px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .sidebar-mobile-show {
+                width: 280px;
+            }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2980b9;
         }
     </style>
 </head>
 <body>
-
     <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>Navigation</h2>
-        <ul>
-            <li><a href="#H1">H1 Mappa</a></li>
-            <li><a href="#H2">H2 Mappa</a></li>
-            <li><a href="#H3">H3 Mappa</a></li>
-            <li><a href="#H4">H4 Mappa</a></li>
+    <div class="sidebar" id="sidebar">
+        <div class="logo-container d-flex align-items-center">
+            <i class="fas fa-code logo-icon"></i>
+            <span class="logo-text">RFTech</span>
+        </div>
+        
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#h1">
+                    <i class="fas fa-file-code"></i>
+                    <span>H1 Mappa</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#h2">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>H2 Mappa</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#h3">
+                    <i class="fas fa-book"></i>
+                    <span>H3 Mappa</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#h4">
+                    <i class="fas fa-cogs"></i>
+                    <span>H4 Mappa</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#team">
+                    <i class="fas fa-users"></i>
+                    <span>Csapat</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Beállítások</span>
+                </a>
+            </li>
         </ul>
-    </div>
-
-    <!-- Main Content -->
-    <div class="content">
-        <div class="container">
-            <!-- Breadcrumb Navigation -->
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Rendszer Fejlesztés Tech.</li>
-                </ol>
-            </nav>
-
-            <h1 class="text-center mb-5">GitHub Mappák és Dokumentáció</h1>
-
-            <!-- Mappa 1 -->
-            <div id="H1" class="folder">
-                <h2 class="folder-title">H1 Mappa: Programozói Nyelvek Fejlesztése</h2>
-                <p class="folder-description">Ez a mappa a programozói nyelvek fejlesztő eszközeit tartalmazza, amelyek segítenek a nyelvek implementálásában és fejlesztésében. Az alábbi dokumentumok találhatóak benne:</p>
-                <ul class="list-unstyled">
-                    <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H1/Programozói-nyelvek-fejlesztő-eszközök.pdf" class="pdf-link" target="_blank">Programozói nyelvek fejlesztő eszközei</a></li>
-                </ul>
-            </div>
-
-            <!-- Mappa 2 -->
-            <div id="H2" class="folder">
-                <h3 class="folder-title">H2 Mappa: Projekt Vízió</h3>
-                <p class="folder-description">Ez a mappa a vízió dokumentumot tartalmazza, amely alapvető fontosságú a projekt sikeréhez. Részletes információkat tartalmaz a projekt jövőbeli céljairól és terveiről:</p>
-                <ul class="list-unstyled">
-                    <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H2/Vízió-dokumentum.pdf" class="pdf-link" target="_blank">Vízió dokumentum</a></li>
-                </ul>
-            </div>
-
-            <!-- Mappa 3 -->
-            <div id="H3" class="folder">
-                <h4 class="folder-title">H3 Mappa: Specifikációk és Kézikönyvek</h4>
-                <p class="folder-description">A H3 mappa különböző fontos specifikációkat és kézikönyveket tartalmaz, amelyek elengedhetetlenek a fejlesztési folyamat során:</p>
-                <ul class="list-unstyled">
-                    <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H3/Software-követelmény-specifikáció.pdf" class="pdf-link" target="_blank">Software követelmény specifikáció</a></li>
-                    <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H3/Felhasználói-Kézikönyv.pdf" class="pdf-link" target="_blank">Felhasználói kézikönyv</a></li>
-                </ul>
-            </div>
-
-            <!-- Mappa 4 -->
-            <div id="H4" class="folder">
-                <h4 class="folder-title">H4 Mappa: Rendszertervezés és Analízis</h4>
-                <p class="folder-description">A H4 mappa a projekt rendszertervezési és analízis dokumentumait tartalmazza, amelyek alapvetőek a fejlesztés és a minőség biztosítás érdekében:</p>
-                <ul class="list-unstyled">
-                    <li><a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H4/Rendszertervezés%20és%20Analízis%20modell.pdf" class="pdf-link" target="_blank">Rendszertervezés és Analízis modell</a></li>
-                </ul>
-            </div>
-
-            <!-- Footer -->
-            <div class="footer">
-                <p>&copy; 2025 Arosdami - Minden jog fenntartva.</p>
+        
+        <div class="position-absolute bottom-0 start-0 p-3 w-100">
+            <div class="text-center text-muted small">
+                <p>v2.4.1 | &copy; 2025</p>
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="header">
+            <button class="toggle-sidebar" id="toggleSidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="d-flex align-items-center">
+                <div class="input-group" style="width: 300px;">
+                    <input type="text" class="form-control" placeholder="Keresés...">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <div class="dropdown ms-3">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span>Admin</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#profile"><i class="fas fa-user me-2"></i>Profil</a></li>
+                        <li><a class="dropdown-item" href="#settings"><i class="fas fa-cog me-2"></i>Beállítások</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#logout"><i class="fas fa-sign-out-alt me-2"></i>Kijelentkezés</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dashboard -->
+        <div id="dashboard">
+            <h2 class="mb-4 animate__animated animate__fadeIn">Üdvözöljük a Rendszer Fejlesztés Tech. felületén!</h2>
+            
+            <div class="row">
+                <div class="col-md-6 col-lg-3 animate__animated animate__fadeInUp animate-delay-1">
+                    <div class="card glass-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-file-alt fa-3x mb-3" style="color: var(--primary-color);"></i>
+                            <h5>Dokumentumok</h5>
+                            <h2 class="mb-0">12</h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 animate__animated animate__fadeInUp animate-delay-2">
+                    <div class="card glass-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-folder-open fa-3x mb-3" style="color: var(--success-color);"></i>
+                            <h5>Mappák</h5>
+                            <h2 class="mb-0">4</h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 animate__animated animate__fadeInUp animate-delay-3">
+                    <div class="card glass-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-users fa-3x mb-3" style="color: var(--accent-color);"></i>
+                            <h5>Csapattagok</h5>
+                            <h2 class="mb-0">8</h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 animate__animated animate__fadeInUp animate-delay-4">
+                    <div class="card glass-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-tasks fa-3x mb-3" style="color: var(--secondary-color);"></i>
+                            <h5>Projektek</h5>
+                            <h2 class="mb-0">3</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <div class="card glass-card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Legutóbbi tevékenységek</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="activity-item d-flex mb-3">
+                                <div class="activity-icon me-3">
+                                    <i class="fas fa-file-upload text-primary"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h6 class="mb-1">Új dokumentum feltöltve</h6>
+                                    <p class="text-muted small mb-0">H1 mappába - 5 perce</p>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-item d-flex mb-3">
+                                <div class="activity-icon me-3">
+                                    <i class="fas fa-edit text-success"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h6 class="mb-1">Dokumentum módosítva</h6>
+                                    <p class="text-muted small mb-0">H3 mappában - 1 órája</p>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-item d-flex mb-3">
+                                <div class="activity-icon me-3">
+                                    <i class="fas fa-user-plus text-info"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h6 class="mb-1">Új csapattag hozzáadva</h6>
+                                    <p class="text-muted small mb-0">Tegnap</p>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-item d-flex">
+                                <div class="activity-icon me-3">
+                                    <i class="fas fa-comment-dots text-warning"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h6 class="mb-1">Új megjegyzés</h6>
+                                    <p class="text-muted small mb-0">H4 mappában - 2 napja</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="card glass-card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Projekt állapot</h5>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="mb-3">Rendszer Fejlesztés Tech.</h6>
+                            
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Fejlesztés</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Tesztelés</span>
+                                    <span>45%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Dokumentáció</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-0">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Üzembe helyezés</span>
+                                    <span>15%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 15%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- H1 Mappa -->
+        <div id="h1" class="mt-5" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0 animate__animated animate__fadeIn">
+                    <i class="fas fa-file-code me-2"></i>H1 Mappa: Programozói Nyelvek Fejlesztése
+                </h2>
+                <button class="btn btn-primary animate__animated animate__fadeIn">
+                    <i class="fas fa-plus me-2"></i>Új dokumentum
+                </button>
+            </div>
+            
+            <div class="card glass-card animate__animated animate__fadeInUp">
+                <div class="card-header">
+                    <h5 class="mb-0">Dokumentumok</h5>
+                </div>
+                <div class="card-body">
+                    <div class="document-item">
+                        <i class="fas fa-file-pdf document-icon"></i>
+                        <div class="document-name">Programozói nyelvek fejlesztő eszközei</div>
+                        <a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H1/Programozói-nyelvek-fejlesztő-eszközök.pdf" class="document-download" target="_blank">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="document-item">
+                        <i class="fas fa-file-code document-icon"></i>
+                        <div class="document-name">Forráskód minták</div>
+                        <a href="#" class="document-download">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="document-item">
+                        <i class="fas fa-file-alt document-icon"></i>
+                        <div class="document-name">Nyelvelemzés dokumentáció</div>
+                        <a href="#" class="document-download">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card glass-card mt-4 animate__animated animate__fadeInUp">
+                <div class="card-header">
+                    <h5 class="mb-0">Mappa leírása</h5>
+                </div>
+                <div class="card-body">
+                    <p>Ez a mappa a programozói nyelvek fejlesztő eszközeit tartalmazza, amelyek segítenek a nyelvek implementálásában és fejlesztésében. Az alábbi dokumentumok találhatóak benne:</p>
+                    <ul>
+                        <li>Programozási nyelv specifikációk</li>
+                        <li>Fordítóprogramok és interpreterek</li>
+                        <li>Fejlesztői eszközök dokumentációja</li>
+                        <li>Forráskód minták és példák</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- H2 Mappa -->
+        <div id="h2" class="mt-5" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0 animate__animated animate__fadeIn">
+                    <i class="fas fa-project-diagram me-2"></i>H2 Mappa: Projekt Vízió
+                </h2>
+                <button class="btn btn-primary animate__animated animate__fadeIn">
+                    <i class="fas fa-plus me-2"></i>Új dokumentum
+                </button>
+            </div>
+            
+            <div class="card glass-card animate__animated animate__fadeInUp">
+                <div class="card-header">
+                    <h5 class="mb-0">Dokumentumok</h5>
+                </div>
+                <div class="card-body">
+                    <div class="document-item">
+                        <i class="fas fa-file-pdf document-icon"></i>
+                        <div class="document-name">Vízió dokumentum</div>
+                        <a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H2/Vízió-dokumentum.pdf" class="document-download" target="_blank">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="document-item">
+                        <i class="fas fa-file-image document-icon"></i>
+                        <div class="document-name">Projekt diagramok</div>
+                        <a href="#" class="document-download">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="document-item">
+                        <i class="fas fa-file-word document-icon"></i>
+                        <div class="document-name">Üzleti terv</div>
+                        <a href="#" class="document-download">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card glass-card mt-4 animate__animated animate__fadeInUp">
+                <div class="card-header">
+                    <h5 class="mb-0">Mappa leírása</h5>
+                </div>
+                <div class="card-body">
+                    <p>Ez a mappa a vízió dokumentumot tartalmazza, amely alapvető fontosságú a projekt sikeréhez. Részletes információkat tartalmaz a projekt jövőbeli céljairól és terveiről:</p>
+                    <ul>
+                        <li>Projekt célkitűzések és célok</li>
+                        <li>Üzleti lehetőségek elemzése</li>
+                        <li>Piaci versenyképesség vizsgálata</li>
+                        <li>Hosszú távú stratégiai tervek</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- H3 Mappa -->
+        <div id="h3" class="mt-5" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0 animate__animated animate__fadeIn">
+                    <i class="fas fa-book me-2"></i>H3 Mappa: Specifikációk és Kézikönyvek
+                </h2>
+                <button class="btn btn-primary animate__animated animate__fadeIn">
+                    <i class="fas fa-plus me-2"></i>Új dokumentum
+                </button>
+            </div>
+            
+            <div class="card glass-card animate__animated animate__fadeInUp">
+                <div class="card-header">
+                    <h5 class="mb-0">Dokumentumok</h5>
+                </div>
+                <div class="card-body">
+                    <div class="document-item">
+                        <i class="fas fa-file-pdf document-icon"></i>
+                        <div class="document-name">Software követelmény specifikáció</div>
+                        <a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H3/Software-követelmény-specifikáció.pdf" class="document-download" target="_blank">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="document-item">
+                        <i class="fas fa-file-pdf document-icon"></i>
+                        <div class="document-name">Felhasználói kézikönyv</div>
+                        <a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H3/Felhasználói-Kézikönyv.pdf" class="document-download" target="_blank">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="document-item">
+                        <i class="fas fa-file-alt document-icon"></i>
+                        <div class="document-name">API dokumentáció</div>
+                        <a href="#" class="document-download">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="document-item">
+                        <i class="fas fa-file-code document-icon"></i>
+                        <div class="document-name">Technikai specifikációk</div>
+                        <a href="#" class="document-download">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card glass-card mt-4 animate__animated animate__fadeInUp">
+                <div class="card-header">
+                    <h5 class="mb-0">Mappa leírása</h5>
+                </div>
+                <div class="card-body">
+                    <p>A H3 mappa különböző fontos specifikációkat és kézikönyveket tartalmaz, amelyek elengedhetetlenek a fejlesztési folyamat során:</p>
+                    <ul>
+                        <li>Rendszerkövetelmények és funkcionális specifikációk</li>
+                        <li>Felhasználói dokumentáció és kézikönyvek</li>
+                        <li>Technikai API dokumentáció</li>
+                        <li>Integrációs útmutatók</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- H4 Mappa -->
+        <div id="h4" class="mt-5" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0 animate__animated animate__fadeIn">
+                    <i class="fas fa-cogs me-2"></i>H4 Mappa: Rendszertervezés és Analízis
+                </h2>
+                <button class="btn btn-primary animate__animated animate__fadeIn">
+                    <i class="fas fa-plus me-2"></i>Új dokumentum
+                </button>
+            </div>
+            
+            <div class="card glass-card animate__animated animate__fadeInUp">
+                <div class="card-header">
+                    <h5 class="mb-0">Dokumentumok</h5>
+                </div>
+                <div class="card-body">
+                    <div class="document-item">
+                        <i class="fas fa-file-pdf document-icon"></i>
+                        <div class="document-name">Rendszertervezés és Analízis modell</div>
+                        <a href="https://github.com/arosdami/rendsz-fejl-tech.github.io/raw/main/H4/Rendszertervezés%20és%20Analízis%20modell.pdf" class="document-download" target="_blank">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="document-item">
+                        <i class="fas fa-file-image document-icon"></i>
+                        <div class="document-name">Architektúra diagramok</div>
+                        <a href="#" class="document-download">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="document-item">
+                        <i class="fas fa-file-alt document-icon"></i>
+                        <div class="document-name">Adatmodell dokumentáció</div>
+                        <a href="#" class="document-download">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card glass-card mt-4 animate__animated animate__fadeInUp">
+                <div class="card-header">
+                    <h5 class="mb-0">Mappa leírása</h5>
+                </div>
+                <div class="card-body">
+                    <p>A H4 mappa a projekt rendszertervezési és analízis dokumentumait tartalmazza, amelyek alapvetőek a fejlesztés és a minőség biztosítás érdekében:</p>
+                    <ul>
+                        <li>Rendszerarchitektúra tervek és diagramok</li>
+                        <li>Adatbázis tervek és ER modellek</li>
+                        <li>Komponens diagramok és osztálymodellek</li>
+                        <li>Teljesítményelemzés és optimalizációs javaslatok</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Team Section -->
+        <div id="team" class="mt-5" style="display: none;">
+            <h2 class="mb-4 animate__animated animate__fadeIn">
+                <i class="fas fa-users me-2"></i>Csapatunk
+            </h2>
+            
+            <div class="row">
+                <div class="col-md-6 col-lg-3 animate__animated animate__fadeInUp animate-delay-1">
+                    <div class="card glass-card text-center">
+                        <div class="card-body">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle mb-3" width="100" alt="Team member">
+                            <h5>Kovács János</h5>
+                            <p class="text-muted">Projektvezető</p>
+                            <div class="d-flex justify-content-center">
+                                <a href="#" class="text-primary mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                                <a href="#" class="text-info mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+                                <a href="#" class="text-danger mx-2"><i class="fab fa-github fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 animate__animated animate__fadeInUp animate-delay-2">
+                    <div class="card glass-card text-center">
+                        <div class="card-body">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle mb-3" width="100" alt="Team member">
+                            <h5>Nagy Eszter</h5>
+                            <p class="text-muted">Szoftverfejlesztő</p>
+                            <div class="d-flex justify-content-center">
+                                <a href="#" class="text-primary mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                                <a href="#" class="text-info mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+                                <a href="#" class="text-danger mx-2"><i class="fab fa-github fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 animate__animated animate__fadeInUp animate-delay-3">
+                    <div class="card glass-card text-center">
+                        <div class="card-body">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" class="rounded-circle mb-3" width="100" alt="Team member">
+                            <h5>Horváth Péter</h5>
+                            <p class="text-muted">Adatbázis szakértő</p>
+                            <div class="d-flex justify-content-center">
+                                <a href="#" class="text-primary mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                                <a href="#" class="text-info mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+                                <a href="#" class="text-danger mx-2"><i class="fab fa-github fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 animate__animated animate__fadeInUp animate-delay-4">
+                    <div class="card glass-card text-center">
+                        <div class="card-body">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle mb-3" width="100" alt="Team member">
+                            <h5>Szabó Anna</h5>
+                            <p class="text-muted">UI/UX Designer</p>
+                            <div class="d-flex justify-content-center">
+                                <a href="#" class="text-primary mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                                <a href="#" class="text-info mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+                                <a href="#" class="text-danger mx-2"><i class="fab fa-github fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Section -->
+        <div id="settings" class="mt-5" style="display: none;">
+            <h2 class="mb-4 animate__animated animate__fadeIn">
+                <i class="fas fa-cog me-2"></i>Beállítások
+            </h2>
+            
+            <div class="row">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <div class="card glass-card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Fiók beállítások</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Felhasználónév</label>
+                                    <input type="text" class="form-control" id="username" value="admin">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email cím</label>
+                                    <input type="email" class="form-control" id="email" value="admin@example.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Új jelszó</label>
+                                    <input type="password" class="form-control" id="password" placeholder="••••••••">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Jelszó megerősítése</label>
+                                    <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Mentés</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="card glass-card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Alkalmazás beállítások</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">Téma</label>
+                                    <select class="form-select">
+                                        <option>Világos</option>
+                                        <option>Sötét</option>
+                                        <option>Rendszer alapértelmezett</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Nyelv</label>
+                                    <select class="form-select">
+                                        <option selected>Magyar</option>
+                                        <option>English</option>
+                                        <option>Deutsch</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="notifications" checked>
+                                    <label class="form-check-label" for="notifications">Értesítések engedélyezése</label>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="autoSave" checked>
+                                    <label class="form-check-label" for="autoSave">Automatikus mentés</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Mentés</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Toggle sidebar
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            sidebar.classList.toggle('sidebar-collapsed');
+            mainContent.classList.toggle('main-content-expanded');
+        });
+        
+        // Simple navigation system
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Hide all sections
+                document.querySelectorAll('#dashboard, #h1, #h2, #h3, #h4, #team, #settings').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show selected section
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).style.display = 'block';
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+        
+        // Animate elements when they come into view
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.animate__animated');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                }
+            });
+        };
+        
+        // Set initial opacity to 0 for animated elements
+        document.querySelectorAll('.animate__animated').forEach(element => {
+            element.style.opacity = '0';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
 </body>
 </html>
