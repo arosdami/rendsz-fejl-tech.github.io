@@ -11,8 +11,9 @@ const previewModalBody = document.getElementById('previewModalBody');
 const downloadFileBtn = document.getElementById('downloadFileBtn');
 
 // GitHub repository details
-const githubRepo = 'arosdami/rendsz-fejl-tech.github.io';
-const apiUrl = `https://api.github.com/repos/rendsz-fejl-tech/rendsz-fejl-tech.github.io/contents/docs`;
+const githubRepo = 'rendsz-fejl-tech/rendsz-fejl-tech.github.io';
+const apiBaseUrl = `https://api.github.com/repos/${githubRepo}/contents`;
+
 
 
 // Initialize Dropzone
